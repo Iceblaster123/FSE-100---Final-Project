@@ -26,9 +26,10 @@ while 1
             display(color);
             brick.StopMotor('BC', 'Coast');
             pause(2);
+            break;
         end
 
-
+                                                            
     end
 
     if(reading)
@@ -43,6 +44,76 @@ while 1
         brick.MoveMotor('C',0);
     end
 
+    distance = brick.UltrasonicDist(1);
+    
+    if(distance < 5)
+
+        brick.MoveMotor('B',-7);
+        brick.MoveMotor('C',7);
+        
+        pause(1);
+
+        brick.MoveMotor('BC',50);
+
+        pause(1);
+
+        brick.MoveMotor('B', 0);
+    end
+
 end
 
 
+
+%This function is to move granny up, hard coded
+
+global key;
+
+InitKeyboard();
+
+    while 1
+
+        pause(0.1);
+
+      switch key
+
+             case 'uparrow'
+
+                brick.MoveMotor('A', 10);
+
+                pause(0.5);
+
+                brick.MoveMotor('A', 0);
+
+            case 'downarrow'
+
+                brick.MoveMotor('A', -10);
+
+                pause(0.5);
+
+                brick.MoveMotor('A', 0);
+
+            case 'leftarrow'
+
+                brick.MoveMotor('BC', -25);
+
+                pause(1);
+
+                brick.MoveMotor('BC', 0);
+
+            case 'rightarrow'
+
+                brick.MoveMotor('BC', 25)
+
+                pause(1);
+
+                brick.MoveMotor('BC', 0);
+
+            case 'q'
+
+                break;
+
+      end
+
+    end
+
+CloseKeyboard();

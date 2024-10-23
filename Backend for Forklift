@@ -1,1 +1,48 @@
+brick.SetColorMode(4, 4);
+
+
+while 1
+    
+        reading = brick.TouchPressed(2);
+        color = brick.ColorCode(4);
+
+
+
+    if ~reading
+    
+        brick.MoveMotor('BC', 50);
+        %brick.MoveMotor('BC', 0);
+
+       
+        if(color == 5)
+            display(color);
+            brick.MoveMotor('BC', 0);
+            pause(1);
+            brick.MoveMotor('BC', 50);
+            pause(1)
+        end
+        
+        if(color == 2)
+            display(color);
+            brick.StopMotor('BC', 'Coast');
+            pause(2);
+        end
+
+
+    end
+
+    if(reading)
+
+        brick.MoveMotor('BC', -50);
+        pause(1)
+        brick.MoveMotor('BC', 0);
+        brick.MoveMotor('C', 50);
+
+        pause(1)
+
+        brick.MoveMotor('C',0);
+    end
+
+end
+
 

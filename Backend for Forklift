@@ -1,3 +1,70 @@
+%{ 
+This was test run: go forward pick up, 90degrees and drop
+
+brick.MoveMotor('BC', 25); % Motor A forward at half speed.
+
+
+pause(2);
+
+brick.MoveMotor('BC', 0);
+
+
+brick.MoveMotor('A', 10);
+
+pause(0.25);
+
+brick.MoveMotor('A', 0);
+
+brick.MoveMotor('B', 50);
+
+pause(1)
+
+brick.MoveMotor('B',0);
+
+brick.MoveMotor('A', -10);
+
+pause(0.25);
+
+brick.MoveMotor('A', 0);
+
+
+brick.MoveMotor('BC', -25);
+
+pause(2);
+
+brick.MoveMotor('BC', 0);
+%}
+%{
+while 1
+    
+    reading = brick.TouchPressed(2);
+      
+    if ~reading
+
+       brick.MoveMotor('BC', 25);
+    end
+    if reading
+        brick.MoveMotor('BC', -25);
+        pause(1)
+        brick.MoveMotor('BC', 0);
+        brick.MoveMotor('C', 50);
+
+        pause(1)
+
+        brick.MoveMotor('C',0);
+    end
+       
+end
+    
+%}
+
+
+
+
+%This is the current path finding model
+
+
+
 brick.SetColorMode(4, 4);
 
 
@@ -10,7 +77,8 @@ while 1
 
     if ~reading
     
-        brick.MoveMotor('BC', 50);
+        brick.MoveMotor('B', 50);
+        brick.MoveMotor('C', 50.75)
         %brick.MoveMotor('BC', 0);
 
        
@@ -48,8 +116,8 @@ while 1
     
     if(distance < 5)
 
-        brick.MoveMotor('B',-7);
-        brick.MoveMotor('C',7);
+        brick.MoveMotor('B',-10);
+        brick.MoveMotor('C',10);
         
         pause(1);
 
@@ -58,6 +126,7 @@ while 1
         pause(1);
 
         brick.MoveMotor('B', 0);
+        brick.MoveMotor('C', 0);
     end
 
 end
@@ -92,7 +161,7 @@ InitKeyboard();
 
                 brick.MoveMotor('A', 0);
 
-            case 'leftarrow'
+            case 's'
 
                 brick.MoveMotor('BC', -25);
 
@@ -100,15 +169,54 @@ InitKeyboard();
 
                 brick.MoveMotor('BC', 0);
 
-            case 'rightarrow'
+            case 'w'
 
                 brick.MoveMotor('BC', 25)
 
                 pause(1);
 
                 brick.MoveMotor('BC', 0);
+            case 't'
 
-            case 'q'
+                brick.MoveMotor('B', 50)
+
+                pause(1);
+
+                brick.MoveMotor('B', 0);
+          case 'd'
+
+              brick.MoveMotor('B', 15);
+
+              pause(1);
+
+              brick.MoveMotor('B', 0);
+
+          case 'a'
+
+              brick.MoveMotor('C', 15);
+
+              pause(1);
+
+              brick.MoveMotor('C', 0);
+            
+          case 'n'
+
+              brick.MoveMotor('C', 6);
+
+              pause(1);
+
+              brick.MoveMotor('C', 0);
+
+           case 'm'
+
+              brick.MoveMotor('B', 4);
+
+              pause(1);
+
+              brick.MoveMotor('B', 0);
+
+          
+          case 'q'
 
                 break;
 
@@ -117,3 +225,196 @@ InitKeyboard();
     end
 
 CloseKeyboard();
+
+
+while 1
+
+     reading = brick.TouchPressed(2);
+     color = brick.ColorCode(4);
+
+     if ~reading
+    
+        brick.MoveMotor('B', 50);
+        brick.MoveMotor('C', 51);
+        %brick.MoveMotor('BC', 0);
+
+     end
+
+     if color == 3
+         display(color);
+         brick.StopMotor('BC', 'Coast');
+         pause(2);
+         break;
+     end
+
+     if(color == 5)
+         display(color);
+         brick.MoveMotor('BC', 0);
+         pause(1);
+         brick.MoveMotor('B', 50);
+         brick.MoveMotor('C', 50.75);
+         pause(1)
+     end
+
+
+    distance = brick.UltrasonicDist(1);
+
+
+     if reading && (distance > 20)
+
+        brick.MoveMotor('BC', -30);
+        pause(1)
+        brick.MoveMotor('BC', 0);
+        brick.MoveMotor('C', -40);
+
+        pause(1)
+
+        brick.MoveMotor('C',0);
+     end
+end
+
+
+%This function is to move granny up, hard coded
+
+global key;
+
+InitKeyboard();
+
+    while 1
+
+        pause(0.1);
+
+      switch key
+
+             case 'uparrow'
+
+                brick.MoveMotor('A', 10);
+
+                pause(0.5);
+
+                brick.MoveMotor('A', 0);
+
+            case 'downarrow'
+
+                brick.MoveMotor('A', -10);
+
+                pause(0.5);
+
+                brick.MoveMotor('A', 0);
+
+            case 's'
+
+                brick.MoveMotor('BC', -25);
+
+                pause(1);
+
+                brick.MoveMotor('BC', 0);
+
+            case 'w'
+
+                brick.MoveMotor('BC', 25)
+
+                pause(1);
+
+                brick.MoveMotor('BC', 0);
+            case 't'
+
+                brick.MoveMotor('B', 50)
+
+                pause(1);
+
+                brick.MoveMotor('B', 0);
+          case 'd'
+
+              brick.MoveMotor('B', 15);
+
+              pause(1);
+
+              brick.MoveMotor('B', 0);
+
+          case 'a'
+
+              brick.MoveMotor('C', 15);
+
+              pause(1);
+
+              brick.MoveMotor('C', 0);
+
+
+          case 'n'
+
+              brick.MoveMotor('C', 6);
+
+              pause(1);
+
+              brick.MoveMotor('C', 0);
+
+           case 'm'
+
+              brick.MoveMotor('B', 4);
+
+              pause(1);
+
+              brick.MoveMotor('B', 0);
+
+          
+          case 'q'
+
+                break;
+
+      end
+
+    end
+
+CloseKeyboard();
+
+%{
+while 1
+    
+    reading = brick.TouchPressed(2);
+     color = brick.ColorCode(4);
+
+     if ~reading
+    
+        brick.MoveMotor('B', 50);
+        brick.MoveMotor('C', 51);
+        %brick.MoveMotor('BC', 0);
+
+     end
+
+     if color == 3
+         display(color);
+         brick.StopMotor('BC', 'Coast');
+         pause(2);
+         break;
+     end
+
+     if(color == 5)
+         display(color);
+         brick.MoveMotor('BC', 0);
+         pause(1);
+         brick.MoveMotor('B', 50);
+         brick.MoveMotor('C', 50.75);
+         pause(1)
+     end
+
+
+    distance = brick.UltrasonicDist(1);
+
+
+     if reading && (distance > 20)
+
+        brick.MoveMotor('BC', -30);
+        pause(1)
+        brick.MoveMotor('BC', 0);
+        brick.MoveMotor('C', -40);
+
+        pause(1)
+
+        brick.MoveMotor('C',0);
+     end
+
+
+end
+
+%}

@@ -39,7 +39,7 @@ while 1
             brick.MoveMotor('BC', -50);
             pause(0.5)
             brick.MoveMotor('BC', 0);
-            brick.MoveMotor('C', 50);
+            brick.MoveMotor('C', 50.5);
 
             pause(0.95);
 
@@ -48,7 +48,7 @@ while 1
    
        distance = brick.UltrasonicDist(1);
         
-       if (distance > 70)
+       if (distance > 60)
             display(distance);
             brick.MoveMotor('B', 50);
             brick.MoveMotor('C', 50.5);
@@ -224,7 +224,7 @@ while 1
             brick.MoveMotor('BC', -50);
             pause(0.5)
             brick.MoveMotor('BC', 0);
-            brick.MoveMotor('C', 50);
+            brick.MoveMotor('C', 50.5);
 
             pause(0.95);
 
@@ -233,7 +233,7 @@ while 1
    
        distance = brick.UltrasonicDist(1);
         
-       if (distance > 70)
+       if (distance > 60)
             display(distance);
             brick.MoveMotor('B', 50);
             brick.MoveMotor('C', 50.5);
@@ -255,8 +255,8 @@ while 1
 
        if (distance < 5)
             display(distance);
-            brick.MoveMotor('B',-7);
-            brick.MoveMotor('C',7);
+            brick.MoveMotor('B',-6);
+            brick.MoveMotor('C',6);
         
             pause(1);
 
@@ -418,7 +418,7 @@ while 1
    
        distance = brick.UltrasonicDist(1);
         
-       if (distance > 70)
+       if (distance > 60)
             display(distance);
             brick.MoveMotor('B', 50);
             brick.MoveMotor('C', 50.5);
